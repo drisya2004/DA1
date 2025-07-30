@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 Year Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    #main-content {
+      display: none;
+      background: #ffe6f0;
+      min-height: 100vh;
+      padding: 30px;
+    }
+    #main-content img {
+      max-width: 280px;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      margin-top: 20px;
+    }
+    .start-btn {
+      margin-top: 40vh;
+      background: #ff4da6;
+      color: white;
+      border: none;
+      font-size: 1.2em;
+      padding: 15px 30px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .start-btn:hover {
+      background: #e60073;
+    }
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 6s infinite ease-in;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes float {
+      0% {
+        bottom: -10%;
+        left: calc(100% * var(--pos));
+        opacity: 1;
+      }
+      100% {
+        bottom: 110%;
+        left: calc(100% * var(--pos) + 40px);
+        opacity: 0;
+      }
+    }
+    .message {
+      font-size: 1.4em;
+      margin: 20px 0;
+      color: #d63384;
+    }
+    .big {
+      font-size: 2em;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ff1a8c;
+    }
+    #typewriter-container {
+  margin: 30px auto;
+  max-width: 90%;
+  min-height: 200px;
+}
+
+#typewriter {
+  font-size: 1.3em;
+  color: #c2185b;
+  white-space: pre-line;
+  line-height: 1.6em;
+}
+.highlight {
+  font-weight: bold;
+  color: #ff1a8c;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts -->
+  <script>
+    for (let i = 0; i < 15; i++) {
+      let heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.setProperty('--pos', Math.random());
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- Button Screen -->
+  <div id="start-screen">
+    <button class="start-btn" onclick="showSurprise()">Tap if you're mine !❤️</button>
+  </div>
+
+  <!-- Main Surprise Content -->
+  <div id="main-content">
+    <div class="message">🎉 Yess... we did it!</div>
+    <div class="message">❤️ One year of us 😘</div>
+    <img src="us.jpg" alt="Us">
+    <!-- Typewriter Paragraph -->
+<div id="typewriter-container">
+  <p id="typewriter"></p>
+</div>
+  </div>
+  <script>
+  const lines = [
+    "Some days we’re sugar, some days we’re storms —",
+    "but somehow, Aadhu, we’re always *us*. 💫",
+    "",
+    "You roll your eyes, make your silly jokes,",
+    "and I act all serious… long face and all 😤",
+    "— but secretly? I love every bit of it.",
+    "Because nothing makes my heart feel more at home",
+    "than you teasing me till I give in with a smile. 💞",
+    "",
+    "I go quiet when I’m mad, you poke me till I laugh again.",
+    "We fight, we fix, we stay — that’s our magic.",
+    "No evil eye, no mood swings, not even our silliest arguments",
+    "can break what we’ve built, Aadhu. 🧿💪",
+    "",
+    "You’ve seen my tantrums, my softness, my chaos…",
+    "and you’ve stayed. Always.",
+    "That’s why I know — this is love.",
+    "Real, imperfect, beautiful. And it’s ours, Aadhu & Minnu. 💘",
+    "",
+    "One whole year. And yet, it feels like we’re just getting started.",
+    "",
+    "<span class='highlight'>ILYSM 💖</span>",
+    "<span class='highlight'>Will you be my forever? 💍</span>"
+  ];
+
+  let i = 0;
+  let currentLine = 0;
+
+  function typeLine() {
+    const typewriter = document.getElementById("typewriter");
+
+    if (currentLine < lines.length) {
+      const rawLine = lines[currentLine];
+      const isHTML = rawLine.includes("<span");
+
+      if (isHTML) {
+        typewriter.innerHTML += rawLine + "<br><br>";
+        currentLine++;
+        setTimeout(typeLine, 800);
+      } else {
+        if (i < rawLine.length) {
+          typewriter.textContent += rawLine.charAt(i);
+          i++;
+          setTimeout(typeLine, 40);
+        } else {
+          typewriter.textContent += "\n\n";
+          i = 0;
+          currentLine++;
+          setTimeout(typeLine, 400);
+        }
+      }
+    }
+  }
+
+  function showSurprise() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    setTimeout(typeLine, 1000);
+  }
+</script>
+</body>
+</html>
